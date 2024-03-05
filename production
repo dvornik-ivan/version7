@@ -1,0 +1,60 @@
+class Product:
+    def __init__(self, name, price, quantity):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+
+    def update_price(self, new_price):
+        self.price = new_price
+        print(f"Price of {self.name} updated to {self.price}")
+
+    def update_quantity(self, new_quantity):
+        self.quantity = new_quantity
+        print(f"Quantity of {self.name} updated to {self.quantity}")
+
+    def __str__(self):
+        return f"Product: {self.name}, Price: {self.price}, Quantity: {self.quantity}"
+
+class Inventory:
+    def __init__(self):
+        self.products = []
+
+    def add_product(self, product):
+        self.products.append(product)
+        print(f"{product.name} added to inventory.")
+
+    def remove_product(self, product_name):
+        for product in self.products:
+            if product.name == product_name:
+                self.products.remove(product)
+                print(f"{product_name} removed from inventory.")
+                return
+        print(f"{product_name} not found in inventory.")
+
+    def display_inventory(self):
+        if self.products:
+            print("Inventory:")
+            for product in self.products:
+                print(product)
+        else:
+            print("Inventory is empty.")
+
+def main():
+    inventory = Inventory()
+
+    product1 = Product("Laptop", 1200, 5)
+    inventory.add_product(product1)
+
+    product2 = Product("Phone", 800, 10)
+    inventory.add_product(product2)
+
+    inventory.display_inventory()
+
+    product1.update_quantity(3)
+    inventory.display_inventory()
+
+    inventory.remove_product("Phone")
+    inventory.display_inventory()
+
+if __name__ == "__main__":
+    main()
